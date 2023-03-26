@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://6vcjo367ptlt"]
+
+[ext_resource type="PackedScene" uid="uid://ti76tv8fcrbk" path="res://assets/blender/floor.glb" id="1_y8cfa"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fibfy"]
+size = Vector3(1, 0.2, 1)
+
+[node name="Surface" type="Area3D"]
+
+[node name="Mesh" parent="." instance=ExtResource("1_y8cfa")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_fibfy")

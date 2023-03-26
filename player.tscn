@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://dbeaqaqsox0i6"]
+
+[ext_resource type="Script" path="res://source/player.gd" id="1_s1b4s"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8ywd2"]
+
+[node name="Player" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("1_s1b4s")
+
+[node name="CollisionShape" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_8ywd2")
+
+[node name="RayCastNorth" type="RayCast3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+target_position = Vector3(0, 0, 2)
+collision_mask = 2
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 1.7683e-07, 0, 1, 0, -1.7683e-07, 0, 1, 0, 0, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
