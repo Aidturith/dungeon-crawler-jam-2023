@@ -7,8 +7,13 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_22e1h"]
 
 [node name="Cell" type="Area3D"]
-collision_mask = 2
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_qrjwc")
+
+[node name="CellShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_22e1h")
 
 [node name="TopFace" parent="." instance=ExtResource("2_4kumf")]
 transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 2, 0)
@@ -22,16 +27,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 
 [node name="WestFace" parent="Walls" instance=ExtResource("2_8ukym")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1, 0, 0)
+visible = false
 
 [node name="SouthFace" parent="Walls" instance=ExtResource("2_8ukym")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -1)
 
 [node name="EastFace" parent="Walls" instance=ExtResource("2_8ukym")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1, 0, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("BoxShape3D_22e1h")
 
 [connection signal="area_shape_entered" from="Walls/NorthFace" to="." method="_on_north_face_area_shape_entered"]
 [connection signal="area_shape_entered" from="Walls/WestFace" to="." method="_on_west_face_area_shape_entered"]

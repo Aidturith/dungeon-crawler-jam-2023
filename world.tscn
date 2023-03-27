@@ -8,17 +8,56 @@
 script = ExtResource("1_0i6mf")
 
 [node name="Player" parent="." instance=ExtResource("2_b0mv2")]
-transform = Transform3D(-1, 0, -2.62268e-07, 0, 1, 0, 2.62268e-07, 0, -1, 0, 1, -4)
+transform = Transform3D(-1, 0, -2.68221e-07, 0, 1, 0, 2.68221e-07, 0, -1, 0, 1, -4)
 
 [node name="Cells" type="Node3D" parent="."]
 
 [node name="Cell" parent="Cells" instance=ExtResource("1_dncq0")]
 
+[node name="Cell8" parent="Cells" instance=ExtResource("1_dncq0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+
+[node name="Cell9" parent="Cells" instance=ExtResource("1_dncq0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
+
+[node name="Cell10" parent="Cells" instance=ExtResource("1_dncq0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 2)
+
+[node name="Cell11" parent="Cells" instance=ExtResource("1_dncq0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 2)
+
+[node name="Cell12" parent="Cells" instance=ExtResource("1_dncq0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+
+[node name="Cell13" parent="Cells" instance=ExtResource("1_dncq0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -2)
+
+[node name="Cell14" parent="Cells" instance=ExtResource("1_dncq0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -4)
+
+[node name="Cell5" parent="Cells" instance=ExtResource("1_dncq0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+
 [node name="Cell2" parent="Cells" instance=ExtResource("1_dncq0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="Cell6" parent="Cells" instance=ExtResource("1_dncq0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2)
 
 [node name="Cell3" parent="Cells" instance=ExtResource("1_dncq0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
 
 [node name="Cell4" parent="Cells" instance=ExtResource("1_dncq0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -4)
+
+[node name="Cell7" parent="Cells" instance=ExtResource("1_dncq0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -4)
+
+[node name="Cell15" parent="Cells" instance=ExtResource("1_dncq0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -6)
+
+[node name="Cell16" parent="Cells" instance=ExtResource("1_dncq0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -8)
+
+[node name="Cell17" parent="Cells" instance=ExtResource("1_dncq0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -8)
