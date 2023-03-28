@@ -12,7 +12,8 @@ script = ExtResource("1_s1b4s")
 shape = SubResource("BoxShape3D_8ywd2")
 
 [node name="Camera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 1.7683e-07, 0, 1, 0, -1.7683e-07, 0, 1, 0, 0, 0)
+transform = Transform3D(1, 0, 1.7683e-07, 0, 1, 0, -1.7683e-07, 0, 1, 0, -0.1, 0.2)
+fov = 80.0
 
 [node name="OmniLight" type="OmniLight3D" parent="."]
 

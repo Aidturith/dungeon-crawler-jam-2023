@@ -1,0 +1,109 @@
+[gd_scene load_steps=3 format=3 uid="uid://bb7ruxcydrsk1"]
+
+[ext_resource type="Texture2D" uid="uid://b6trbe354hli1" path="res://assets/images/Celestino-Piatti-lyon.jpg" id="1_2r7xs"]
+[ext_resource type="Script" path="res://source/main_menu.gd" id="1_bkpyn"]
+
+[node name="MainMenu" type="Control"]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bkpyn")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0509804, 0.160784, 0.109804, 1)
+
+[node name="Pause" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Pause"]
+layout_mode = 2
+
+[node name="Logo" type="TextureRect" parent="Pause/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_2r7xs")
+stretch_mode = 3
+
+[node name="Buttons" type="HBoxContainer" parent="Pause/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Start" type="Button" parent="Pause/VBoxContainer/Buttons"]
+layout_mode = 2
+text = "Start"
+
+[node name="Resume" type="Button" parent="Pause/VBoxContainer/Buttons"]
+visible = false
+layout_mode = 2
+text = "Resume"
+
+[node name="Options" type="Button" parent="Pause/VBoxContainer/Buttons"]
+layout_mode = 2
+text = "Options"
+
+[node name="Return" type="Button" parent="Pause/VBoxContainer/Buttons"]
+visible = false
+layout_mode = 2
+text = "Return to menu"
+
+[node name="Exit" type="Button" parent="Pause/VBoxContainer/Buttons"]
+layout_mode = 2
+text = "Exit"
+
+[node name="Options" type="MarginContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Options"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Options/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+
+[node name="MoveSpeedLabel" type="Label" parent="Options/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Move Speed"
+
+[node name="MoveSpeedSlider" type="HSlider" parent="Options/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 0.1
+max_value = 0.5
+step = 0.1
+value = 0.1
+
+[node name="Back" type="Button" parent="Options/VBoxContainer"]
+layout_mode = 2
+text = "Back
+"
+
+[connection signal="pressed" from="Pause/VBoxContainer/Buttons/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Pause/VBoxContainer/Buttons/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Pause/VBoxContainer/Buttons/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="Pause/VBoxContainer/Buttons/Return" to="." method="_on_return_pressed"]
+[connection signal="pressed" from="Pause/VBoxContainer/Buttons/Exit" to="." method="_on_exit_pressed"]
+[connection signal="ready" from="Options/VBoxContainer/HBoxContainer/MoveSpeedSlider" to="." method="_on_move_speed_slider_ready"]
+[connection signal="value_changed" from="Options/VBoxContainer/HBoxContainer/MoveSpeedSlider" to="." method="_on_move_speed_slider_value_changed"]
+[connection signal="pressed" from="Options/VBoxContainer/Back" to="." method="_on_back_pressed"]

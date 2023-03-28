@@ -6,7 +6,6 @@ const JUMP_VELOCITY = 4.5
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
-var tween_speed = Global.player_tween_speed
 var moving = false  # will need a state machine ?
 
 
@@ -16,25 +15,25 @@ func _ready():
 
 func _physics_process(_delta):
 
-	if Input.is_action_just_pressed("ui_up") and not moving:
+	if Input.is_action_pressed("ui_up") and not moving:
 		var cell = get_cell($FrontMark)
 		if cell:
 			moving = true
 			var move_to = cell.get_node('CellShape').global_position
 			tween_forward(move_to)
 
-	if Input.is_action_just_pressed("ui_down") and not moving:
+	if Input.is_action_pressed("ui_down") and not moving:
 		var cell = get_cell($BackMark)
 		if cell:
 			moving = true
 			var move_to = cell.get_node('CellShape').global_position
 			tween_forward(move_to)
 		
-	if Input.is_action_just_pressed("ui_left") and not moving:
+	if Input.is_action_pressed("ui_left") and not moving:
 		moving = true
 		tween_turn(PI/2)
 			
-	if Input.is_action_just_pressed("ui_right") and not moving:
+	if Input.is_action_pressed("ui_right") and not moving:
 		moving = true
 		tween_turn(-PI/2)
 	
@@ -68,10 +67,12 @@ func get_cell(mark: Marker3D):
 	return result.get('collider', null)
 
 func tween_forward(position_: Vector3):
+	# TODO add some head bobbing
 	var tween = create_tween()
+	var speed = Global.get_player_speed()
 	tween.set_ease(Tween.EASE_IN_OUT)
 	tween.set_trans(Tween.TRANS_QUAD)
-	tween.tween_property(self, "position", position_, tween_speed)
+	tween.tween_property(self, "position", position_, speed)
 	tween.tween_callback(_stop_moving)
 
 func tween_turn(radients: float):
@@ -79,9 +80,10 @@ func tween_turn(radients: float):
 	var new_transform = transform
 	new_transform.basis = transform.basis.rotated(axis, radients)
 	var tween = create_tween()
+	var speed = Global.get_player_speed()
 	tween.set_ease(Tween.EASE_IN_OUT)
 	tween.set_trans(Tween.TRANS_QUAD)
-	tween.tween_property(self, "transform", new_transform, tween_speed)
+	tween.tween_property(self, "transform", new_transform, speed)
 	tween.tween_callback(_stop_moving)
 
 func _stop_moving():

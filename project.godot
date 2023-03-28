@@ -23,8 +23,3 @@ Global="*res://source/global.gd"
 
 3d_physics/layer_1="Walls"
 3d_physics/layer_2="Cells"
-
-[rendering]
-
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"

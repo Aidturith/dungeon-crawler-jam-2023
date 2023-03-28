@@ -1,11 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://c1mcpdfx3fa07"]
+[gd_scene load_steps=6 format=3 uid="uid://c1mcpdfx3fa07"]
 
 [ext_resource type="Script" path="res://source/world.gd" id="1_0i6mf"]
 [ext_resource type="PackedScene" uid="uid://einw8b6vrmj3" path="res://cell.tscn" id="1_dncq0"]
 [ext_resource type="PackedScene" uid="uid://dbeaqaqsox0i6" path="res://player.tscn" id="2_b0mv2"]
+[ext_resource type="PackedScene" uid="uid://bb7ruxcydrsk1" path="res://main_menu.tscn" id="4_l46bi"]
+
+[sub_resource type="Environment" id="Environment_jtqp7"]
+background_mode = 1
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_0i6mf")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_jtqp7")
 
 [node name="Player" parent="." instance=ExtResource("2_b0mv2")]
 transform = Transform3D(-1, 0, -2.68221e-07, 0, 1, 0, 2.68221e-07, 0, -1, 0, 1, -4)
@@ -61,3 +68,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -8)
 
 [node name="Cell17" parent="Cells" instance=ExtResource("1_dncq0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -8)
+
+[node name="MainMenu" parent="." instance=ExtResource("4_l46bi")]
+visible = false

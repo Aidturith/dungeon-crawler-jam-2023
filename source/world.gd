@@ -4,13 +4,17 @@ extends Node3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print("ready")
+	randomize()
+	# var env = get_tree().root.world.fallback_environment
+	# env.background_mode = Environment.BG_COLOR
+	# env.background_color = Color.BLACK
+	# env.ambient_light_color = Color("432d6d")
+	# env.dof_blur_far_enabled = true
+	# env.dof_blur_near_enabled = true
 	remove_redundant_walls()
-	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
 
