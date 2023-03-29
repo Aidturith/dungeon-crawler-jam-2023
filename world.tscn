@@ -70,10 +70,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -8)
 [node name="Cell17" parent="Cells" instance=ExtResource("1_dncq0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -8)
 
-[node name="MainMenu" parent="." instance=ExtResource("4_l46bi")]
-visible = false
-
 [node name="Objects" type="Node3D" parent="."]
 
 [node name="Barrel" parent="Objects" instance=ExtResource("5_bax04")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 0, -0.6)
+
+[node name="MainMenu" parent="." instance=ExtResource("4_l46bi")]
+visible = false

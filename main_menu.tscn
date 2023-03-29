@@ -11,6 +11,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
 script = ExtResource("1_bkpyn")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -23,6 +25,7 @@ grow_vertical = 2
 color = Color(0.0509804, 0.160784, 0.109804, 1)
 
 [node name="Pause" type="MarginContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -66,26 +69,29 @@ layout_mode = 2
 text = "Exit"
 
 [node name="Options" type="MarginContainer" parent="."]
-visible = false
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.2
+anchor_right = 0.8
+anchor_bottom = 0.8
+offset_left = -53.0
+offset_top = -30.5
+offset_right = 53.0
+offset_bottom = 30.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Options"]
+[node name="GridContainer" type="GridContainer" parent="Options"]
 layout_mode = 2
+columns = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Options/VBoxContainer"]
+[node name="MoveSpeedLabel" type="Label" parent="Options/GridContainer"]
 layout_mode = 2
-size_flags_vertical = 6
+size_flags_horizontal = 0
+text = "Move Speed 0s"
 
-[node name="MoveSpeedLabel" type="Label" parent="Options/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "Move Speed"
-
-[node name="MoveSpeedSlider" type="HSlider" parent="Options/VBoxContainer/HBoxContainer"]
+[node name="MoveSpeedSlider" type="HSlider" parent="Options/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -94,7 +100,16 @@ max_value = 0.5
 step = 0.1
 value = 0.1
 
-[node name="Back" type="Button" parent="Options/VBoxContainer"]
+[node name="QueueInputLabel" type="Label" parent="Options/GridContainer"]
+layout_mode = 2
+text = "Queue input"
+
+[node name="QueueInputCheck" type="CheckButton" parent="Options/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Back" type="Button" parent="Options/GridContainer"]
 layout_mode = 2
 text = "Back
 "
@@ -104,6 +119,7 @@ text = "Back
 [connection signal="pressed" from="Pause/VBoxContainer/Buttons/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="Pause/VBoxContainer/Buttons/Return" to="." method="_on_return_pressed"]
 [connection signal="pressed" from="Pause/VBoxContainer/Buttons/Exit" to="." method="_on_exit_pressed"]
-[connection signal="ready" from="Options/VBoxContainer/HBoxContainer/MoveSpeedSlider" to="." method="_on_move_speed_slider_ready"]
-[connection signal="value_changed" from="Options/VBoxContainer/HBoxContainer/MoveSpeedSlider" to="." method="_on_move_speed_slider_value_changed"]
-[connection signal="pressed" from="Options/VBoxContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="ready" from="Options/GridContainer/MoveSpeedSlider" to="." method="_on_move_speed_slider_ready"]
+[connection signal="value_changed" from="Options/GridContainer/MoveSpeedSlider" to="." method="_on_move_speed_slider_value_changed"]
+[connection signal="ready" from="Options/GridContainer/QueueInputCheck" to="." method="_on_queue_input_check_ready"]
+[connection signal="pressed" from="Options/GridContainer/Back" to="." method="_on_back_pressed"]

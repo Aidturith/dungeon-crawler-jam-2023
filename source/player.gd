@@ -6,6 +6,7 @@ const JUMP_VELOCITY = 4.5
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+var queued_input = null
 var moving = false  # will need a state machine ?
 
 
@@ -15,27 +16,24 @@ func _ready():
 
 func _physics_process(_delta):
 
-	if Input.is_action_pressed("ui_up") and not moving:
-		var cell = get_cell($FrontMark)
-		if cell:
-			moving = true
-			var move_to = cell.get_node('CellShape').global_position
-			tween_forward(move_to)
-
-	if Input.is_action_pressed("ui_down") and not moving:
-		var cell = get_cell($BackMark)
-		if cell:
-			moving = true
-			var move_to = cell.get_node('CellShape').global_position
-			tween_forward(move_to)
-		
-	if Input.is_action_pressed("ui_left") and not moving:
-		moving = true
-		tween_turn(PI/2)
-			
-	if Input.is_action_pressed("ui_right") and not moving:
-		moving = true
-		tween_turn(-PI/2)
+	if not moving:
+		if Input.is_action_pressed("ui_up"):
+			move_forth()
+		if Input.is_action_pressed("ui_down"):
+			move_back()
+		if Input.is_action_pressed("ui_left"):
+			move_left()
+		if Input.is_action_pressed("ui_right"):
+			move_right()
+	elif Global.player_queue_input:
+		if Input.is_action_just_pressed("ui_up"):
+			queued_input = "ui_up"
+		if Input.is_action_just_pressed("ui_down"):
+			queued_input = "ui_down"
+		if Input.is_action_just_pressed("ui_left"):
+			queued_input = "ui_left"
+		if Input.is_action_just_pressed("ui_right"):
+			queued_input = "ui_right"
 	
 
 	# if not is_on_floor():
@@ -66,8 +64,22 @@ func get_cell(mark: Marker3D):
 	var result = space_state.intersect_ray(query)
 	return result.get('collider', null)
 
-func tween_forward(position_: Vector3):
-	# TODO add some head bobbing
+func move_forth():
+	var cell = get_cell($FrontMark)
+	if cell:
+		moving = true
+		var move_to = cell.get_node('CellShape').global_position
+		tween_toward(move_to)
+
+func move_back():
+	var cell = get_cell($BackMark)
+	if cell:
+		moving = true
+		var move_to = cell.get_node('CellShape').global_position
+		tween_toward(move_to)
+
+func tween_toward(position_: Vector3):
+	$Camera/AnimationPlayer.play("head-bob")
 	var tween = create_tween()
 	var speed = Global.get_player_speed()
 	tween.set_ease(Tween.EASE_IN_OUT)
@@ -75,7 +87,16 @@ func tween_forward(position_: Vector3):
 	tween.tween_property(self, "position", position_, speed)
 	tween.tween_callback(_stop_moving)
 
+func move_left():
+	moving = true
+	tween_turn(PI/2)
+
+func move_right():
+	moving = true
+	tween_turn(-PI/2)
+
 func tween_turn(radients: float):
+	$Camera/AnimationPlayer.play("head-bob")
 	var axis = Vector3(0, 1, 0)
 	var new_transform = transform
 	new_transform.basis = transform.basis.rotated(axis, radients)
@@ -89,3 +110,14 @@ func tween_turn(radients: float):
 func _stop_moving():
 	self.moving = false
 	self.transform = self.transform.orthonormalized()
+	$Camera/AnimationPlayer.stop(true)
+	if queued_input == "ui_up":
+		move_forth()
+	if queued_input == "ui_down":
+		move_back()
+	if queued_input == "ui_left":
+		move_left()
+	if queued_input == "ui_right":
+		move_right()
+	queued_input = null
+	

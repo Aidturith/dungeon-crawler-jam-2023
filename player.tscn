@@ -1,19 +1,64 @@
-[gd_scene load_steps=3 format=3 uid="uid://dbeaqaqsox0i6"]
+[gd_scene load_steps=6 format=3 uid="uid://dbeaqaqsox0i6"]
 
 [ext_resource type="Script" path="res://source/player.gd" id="1_s1b4s"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8ywd2"]
+size = Vector3(1, 1.5, 1)
+
+[sub_resource type="Animation" id="Animation_8y5g2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -0.1, 0.2)]
+}
+
+[sub_resource type="Animation" id="Animation_wofwt"]
+resource_name = "head-bob"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -0.1, 0.2), Vector3(0, -0.08, 0.2), Vector3(0, -0.1, 0.2)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jqyst"]
+_data = {
+"RESET": SubResource("Animation_8y5g2"),
+"head-bob": SubResource("Animation_wofwt")
+}
 
 [node name="Player" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("1_s1b4s")
 
 [node name="CollisionShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 shape = SubResource("BoxShape3D_8ywd2")
 
 [node name="Camera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 1.7683e-07, 0, 1, 0, -1.7683e-07, 0, 1, 0, -0.1, 0.2)
 fov = 80.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera"]
+libraries = {
+"": SubResource("AnimationLibrary_jqyst")
+}
 
 [node name="OmniLight" type="OmniLight3D" parent="."]
 

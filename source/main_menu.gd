@@ -52,13 +52,28 @@ func _on_options_pressed():
 
 func _on_move_speed_slider_value_changed(value:float):
 	Global.set_player_speed(value)
-	$Options/VBoxContainer/HBoxContainer/MoveSpeedLabel.text = 'Move Speed %.1fs' % [value]
+	$Options/GridContainer/MoveSpeedLabel.text = 'Move Speed %.1fs' % [value]
+	if value <= 0.2:
+		Global.player_queue_input = false
+		$Options/GridContainer/QueueInputCheck.disabled = true
+		$Options/GridContainer/QueueInputCheck.button_pressed = false
+	else:
+		Global.player_queue_input = true
+		$Options/GridContainer/QueueInputCheck.disabled = false
+		$Options/GridContainer/QueueInputCheck.button_pressed = true
+
+
 
 
 func _on_move_speed_slider_ready():
-	$Options/VBoxContainer/HBoxContainer/MoveSpeedSlider.value = Global.get_player_speed()
+	$Options/GridContainer/MoveSpeedSlider.value = Global.get_player_speed()
 	
+
+func _on_queue_input_check_ready():
+	$Options/GridContainer/QueueInputCheck.button_pressed = Global.player_queue_input
+
 
 func _on_back_pressed():
 	$Pause.show()
 	$Options.hide()
+
