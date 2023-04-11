@@ -66,7 +66,7 @@ func get_cell(mark: Marker3D):
 
 func move_forth():
 	var cell = get_cell($FrontMark)
-	if cell:
+	if cell && cell.name.begins_with('Cell'):
 		moving = true
 		var move_to = cell.get_node('CellShape').global_position
 		tween_toward(move_to)
