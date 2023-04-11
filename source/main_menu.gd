@@ -56,11 +56,11 @@ func _on_move_speed_slider_value_changed(value:float):
 	if value <= 0.2:
 		Global.player_queue_input = false
 		$Options/GridContainer/QueueInputCheck.disabled = true
-		$Options/GridContainer/QueueInputCheck.button_pressed = false
+		$Options/GridContainer/QueueInputCheck.emit_signal("ready")
 	else:
 		Global.player_queue_input = true
 		$Options/GridContainer/QueueInputCheck.disabled = false
-		$Options/GridContainer/QueueInputCheck.button_pressed = true
+		$Options/GridContainer/QueueInputCheck.emit_signal("ready")
 
 
 

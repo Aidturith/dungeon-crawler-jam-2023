@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://c1mcpdfx3fa07"]
+[gd_scene load_steps=8 format=3 uid="uid://c1mcpdfx3fa07"]
 
 [ext_resource type="Script" path="res://source/world.gd" id="1_0i6mf"]
 [ext_resource type="PackedScene" uid="uid://einw8b6vrmj3" path="res://cell.tscn" id="1_dncq0"]
 [ext_resource type="PackedScene" uid="uid://dbeaqaqsox0i6" path="res://player.tscn" id="2_b0mv2"]
 [ext_resource type="PackedScene" uid="uid://bb7ruxcydrsk1" path="res://main_menu.tscn" id="4_l46bi"]
+[ext_resource type="PackedScene" uid="uid://bfgpmky1dquf" path="res://door.tscn" id="5_7eanm"]
 [ext_resource type="PackedScene" uid="uid://bdg8mleryibt1" path="res://assets/blender/barrel.glb" id="5_bax04"]
 
 [sub_resource type="Environment" id="Environment_jtqp7"]
@@ -74,6 +75,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -8)
 
 [node name="Barrel" parent="Objects" instance=ExtResource("5_bax04")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 0, -0.6)
+
+[node name="Door" parent="Objects" instance=ExtResource("5_7eanm")]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 4, 0, -5)
 
 [node name="MainMenu" parent="." instance=ExtResource("4_l46bi")]
 visible = false

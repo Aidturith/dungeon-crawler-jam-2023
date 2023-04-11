@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://bfgpmky1dquf"]
+
+[ext_resource type="PackedScene" uid="uid://bepowhjf3u2bg" path="res://assets/blender/sliding-door.glb" id="1_7cvn6"]
+[ext_resource type="Script" path="res://source/door.gd" id="1_i43m0"]
+[ext_resource type="PackedScene" uid="uid://crxgqsm2remqb" path="res://assets/blender/sliding-door-button.glb" id="1_s2sym"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qt5nr"]
+size = Vector3(0.2, 0.2, 0.4)
+
+[node name="Door" type="Node3D"]
+script = ExtResource("1_i43m0")
+
+[node name="sliding-door" parent="." instance=ExtResource("1_7cvn6")]
+
+[node name="sliding-door-button" parent="." instance=ExtResource("1_s2sym")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -2)
+
+[node name="ButtonHitBox" type="Area3D" parent="sliding-door-button"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="sliding-door-button/ButtonHitBox"]
+shape = SubResource("BoxShape3D_qt5nr")
+
+[connection signal="input_event" from="sliding-door-button/ButtonHitBox" to="." method="_on_button_hit_box_input_event"]
