@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7gpkumod3ywp"]
+
+[ext_resource type="Script" path="res://source/button.gd" id="1_hoa23"]
+[ext_resource type="PackedScene" uid="uid://crxgqsm2remqb" path="res://assets/blender/sliding-door-button.glb" id="1_yntfw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bd4ij"]
+size = Vector3(0.2, 0.2, 0.4)
+
+[node name="Button" type="Node3D"]
+script = ExtResource("1_hoa23")
+
+[node name="Model" parent="." instance=ExtResource("1_yntfw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Area3D" type="Area3D" parent="Model"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Model/Area3D"]
+shape = SubResource("BoxShape3D_bd4ij")
+
+[connection signal="input_event" from="Model/Area3D" to="." method="_on_area_3d_input_event"]
