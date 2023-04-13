@@ -1,13 +1,72 @@
-[gd_scene load_steps=4 format=3 uid="uid://b7gpkumod3ywp"]
+[gd_scene load_steps=8 format=3 uid="uid://b7gpkumod3ywp"]
 
 [ext_resource type="Script" path="res://source/button.gd" id="1_hoa23"]
 [ext_resource type="PackedScene" uid="uid://crxgqsm2remqb" path="res://assets/blender/sliding-door-button.glb" id="1_yntfw"]
+
+[sub_resource type="Animation" id="Animation_od3jh"]
+resource_name = "push"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Model:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 1, 0), Vector3(-0.03, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_wyull"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Model:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_vveye"]
+resource_name = "pull"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Model:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.03, 1, 0), Vector3(0, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jb8ep"]
+_data = {
+"RESET": SubResource("Animation_wyull"),
+"pull": SubResource("Animation_vveye"),
+"push": SubResource("Animation_od3jh")
+}
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bd4ij"]
 size = Vector3(0.2, 0.2, 0.4)
 
 [node name="Button" type="Node3D"]
 script = ExtResource("1_hoa23")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_jb8ep")
+}
 
 [node name="Model" parent="." instance=ExtResource("1_yntfw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -16,5 +75,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Model/Area3D"]
 shape = SubResource("BoxShape3D_bd4ij")
+
+[node name="FrontMarker" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.207818, 1, 0)
 
 [connection signal="input_event" from="Model/Area3D" to="." method="_on_area_3d_input_event"]

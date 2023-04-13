@@ -17,9 +17,13 @@ func _on_source_toggle():
 
 func open():
 	# TODO randomize pitch sound
+	# TODO have a nice blend in between animations
+	$AnimationPlayer.pause()
 	$AnimationPlayer.play("open")
 	self.is_open = true
 	
 func close():
+	$AnimationPlayer.pause()
+	# $AnimationPlayer.play_backwards("open")
 	$AnimationPlayer.play("close")
 	self.is_open = false
