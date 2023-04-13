@@ -23,3 +23,4 @@ Global="*res://source/global.gd"
 
 3d_physics/layer_1="Walls"
 3d_physics/layer_2="Cells"
+3d_physics/layer_3="Obstacles"

@@ -53,27 +53,29 @@ func _physics_process(_delta):
 
 	# move_and_slide()
 
-func get_cell(mark: Marker3D):
+func raycast_query(mark: Marker3D, mask: int):
 	var space_state = get_world_3d().direct_space_state
 	var from = self.global_position
 	var to = mark.global_position
 	var query = PhysicsRayQueryParameters3D.create(from, to)
 	query.collide_with_bodies = false
 	query.collide_with_areas = true
-	query.collision_mask = Global.cell_mask
+	query.collision_mask = mask
 	var result = space_state.intersect_ray(query)
 	return result.get('collider', null)
 
-func move_forth():
-	var cell = get_cell($FrontMark)
-	if cell && cell.name.begins_with('Cell'):
+func move_forth(): 
+	var cell = raycast_query($FrontMark, Global.cell_mask)
+	var obstacle = raycast_query($FrontMark, Global.obstacle_mask)
+	if not obstacle and cell:
 		moving = true
 		var move_to = cell.get_node('CellShape').global_position
 		tween_toward(move_to)
 
 func move_back():
-	var cell = get_cell($BackMark)
-	if cell:
+	var cell = raycast_query($BackMark, Global.cell_mask)
+	var obstacle = raycast_query($BackMark, Global.obstacle_mask)
+	if not obstacle and cell:
 		moving = true
 		var move_to = cell.get_node('CellShape').global_position
 		tween_toward(move_to)
